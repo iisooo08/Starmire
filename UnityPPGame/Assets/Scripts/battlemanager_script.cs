@@ -23,10 +23,11 @@ public class battlemanager_script : MonoBehaviour
         {
             Instantiate();
             yield return new WaitForSeconds(speed);
+            DeleteRow();
             MoveDown();
             if(nextindex == fullatklist.Count - 1)
             {
-                print("battle is over");
+                StartCoroutine(Remaining());
             }
             else
             {
@@ -37,16 +38,30 @@ public class battlemanager_script : MonoBehaviour
 
     public void MoveDown()
     {
-        for(int x = 0; x < 4; x++)
+        for (int j = 3; j > -1; j--)
         {
-            foreach (Transform child in vpos[x].transform)
+            List<GameObject> childrenToMove = new List<GameObject>();
+
+            for (int i = 0; i < vpos[j].transform.childCount; i++)
             {
-                GameObject childObject = child.gameObject;
-                childObject.transform.position = new Vector3(childObject.transform.position.x, vpos[x+1].transform.position.y, childObject.transform.position.z);
-                childObject.transform.SetParent(vpos[x+1].transform, worldPositionStays:true);
+                GameObject childObject = vpos[j].transform.GetChild(i).gameObject;
+                childrenToMove.Add(childObject);
+            }
+
+            foreach (GameObject childObject in childrenToMove)
+            {
+                if (j + 1 < vpos.Count)
+                {
+                    childObject.transform.position = new Vector3(
+                        childObject.transform.position.x,
+                        vpos[j + 1].transform.position.y,
+                        childObject.transform.position.z
+                    );
+
+                    childObject.transform.SetParent(vpos[j + 1].transform, worldPositionStays: true);
+                }
             }
         }
-
     }
 
     public void Instantiate()
@@ -57,6 +72,29 @@ public class battlemanager_script : MonoBehaviour
             GameObject newestline = Instantiate(elements[fullatklist[nextindex][x]-'0'], new Vector2(hpos[currentindex].transform.position.x, vpos[0].transform.position.y), Quaternion.identity);
             newestline.transform.SetParent(vpos[0].transform, worldPositionStays: true);
             currentindex++;
+        }
+    }
+
+    public IEnumerator Remaining()
+    {
+        for(int x = 0; x < 3; x++)
+        {
+            yield return new WaitForSeconds(speed);
+            DeleteRow();
+            MoveDown();
+        }
+        yield return new WaitForSeconds(speed);
+        DeleteRow();
+    }
+
+    public void DeleteRow()
+    {
+        if(vpos[4].transform.childCount != 0)
+        {
+            foreach (Transform child in vpos[4].transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }
