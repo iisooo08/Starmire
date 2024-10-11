@@ -5,13 +5,14 @@ using UnityEngine;
 public class battlemanager_script : MonoBehaviour
 {
     public List<string> fullatklist = new List<string>();
+    public List<int> changeorder = new List<int>();
     public List<GameObject> elements = new List<GameObject>(); //list containing one, zero, and bug 
     private int currentindex; //when instantiating the values on the grid, to know which grid should be filled next 
     // Start is called before the first frame update
     private int nextindex; //to know which element of the fullatklist must be instantiated next 
     public List<GameObject> hpos = new List<GameObject>();
     public List<GameObject> vpos = new List<GameObject>();
-    public float speed = 1f;
+    public static float speed = 1f;
     void Start()
     {
         StartCoroutine(AttackFlow());
@@ -19,9 +20,13 @@ public class battlemanager_script : MonoBehaviour
 
     public IEnumerator AttackFlow()
     {
+        yield return new WaitForSeconds(3f);
         for(int x = 0; x < fullatklist.Count; x++)
         {
-            Instantiate();
+            if(x%2 == 0)
+            {
+                Instantiate();
+            }
             yield return new WaitForSeconds(speed);
             DeleteRow();
             MoveDown();
@@ -32,6 +37,10 @@ public class battlemanager_script : MonoBehaviour
             else
             {
                 nextindex++;
+            }
+            if(changeorder[x] == 1)
+            {
+                GameObject.Find("battle_player").GetComponent<player_battlescript>().ChangeSprite();
             }
         }
     }

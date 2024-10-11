@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Objects/Scenes/rk_councilbuilding.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/storyboardscene.unity
+    guid: f221c1b390b2748f393c2327a19b373c
   m_configObjects: {}
