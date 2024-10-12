@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class player_battlescript : MonoBehaviour
 {
@@ -13,6 +14,12 @@ public class player_battlescript : MonoBehaviour
     public GameObject redsquare;
     public GameObject greensquare;
     public Slider healthbar;
+    public AudioSource good;
+    public AudioSource bad;
+    public AudioSource mission;
+    public int combo; 
+    public TextMeshProUGUI combotext;
+    public Animator comboanim; 
     // Start is called before the first frame update
     void Start()
     {
@@ -43,12 +50,26 @@ public class player_battlescript : MonoBehaviour
 
     void displayred()
     {
+        bad.Play();
+        combo = 0; 
+        combotext.text = combo + "";
         Instantiate(redsquare, gameObject.transform.position, Quaternion.identity);
     }
 
     void displaygreen()
     {
+        good.Play();
+        combo++; 
+        combotext.text = combo + ""; 
         Instantiate(greensquare, gameObject.transform.position, Quaternion.identity);
+        StartCoroutine(AnimateCombo());
+    }
+
+    IEnumerator AnimateCombo()
+    {
+        comboanim.SetTrigger("anim");
+        yield return new WaitForSeconds(0.12f);
+        comboanim.SetTrigger("back");
     }
 
     void OnTriggerEnter2D(Collider2D other)

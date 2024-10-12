@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class battlemanager_script : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class battlemanager_script : MonoBehaviour
     private int nextindex; //to know which element of the fullatklist must be instantiated next 
     public List<GameObject> hpos = new List<GameObject>();
     public List<GameObject> vpos = new List<GameObject>();
-    public static float speed = 1f;
+    public static float speed = 0.6f;
+    public Slider progressbar; 
     void Start()
     {
+        progressbar.maxValue = fullatklist.Count;
         StartCoroutine(AttackFlow());
     }
 
@@ -23,6 +26,7 @@ public class battlemanager_script : MonoBehaviour
         yield return new WaitForSeconds(3f);
         for(int x = 0; x < fullatklist.Count; x++)
         {
+            progressbar.value = nextindex;
             if(x%2 == 0)
             {
                 Instantiate();
