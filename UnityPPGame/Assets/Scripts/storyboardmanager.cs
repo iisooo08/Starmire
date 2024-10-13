@@ -13,6 +13,9 @@ public class storyboardmanager : MonoBehaviour
     private int index;
     private int starting;
     public static int nextscene;
+    public int stopmusic; 
+    public AudioSource music;
+    public AudioSource typing;
 
     void Update()
     {
@@ -28,6 +31,10 @@ public class storyboardmanager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Return) && index >= storylist.Count)
         {
             SceneManager.LoadScene(nextscene);
+        }
+        if(stopmusic != 0 && stopmusic == index)
+        {
+            music.Stop();
         }
     }
 
@@ -53,6 +60,10 @@ public class storyboardmanager : MonoBehaviour
         {
             foreach (char letter in dialoguelist[index])
             {
+                if(letter + "" != " ")
+                {
+                    typing.Play();
+                }
                 dialoguetext.text += letter;
                 yield return new WaitForSeconds(0.07f);
             }
