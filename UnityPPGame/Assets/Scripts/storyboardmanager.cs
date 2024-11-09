@@ -12,7 +12,7 @@ public class storyboardmanager : MonoBehaviour
     public TextMeshProUGUI dialoguetext;
     private int index;
     private int starting;
-    public static int nextscene;
+    public int nextscene;
     public int stopmusic; 
     public AudioSource music;
     public AudioSource typing;

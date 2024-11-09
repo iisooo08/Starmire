@@ -6,12 +6,72 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/openingscene.unity
-    guid: 4b4d2d9903ef54bb6b93a976119cf30f
-  - enabled: 1
     path: Assets/Scenes/storyboardscene.unity
     guid: f221c1b390b2748f393c2327a19b373c
   - enabled: 1
-    path: Assets/Scenes/pk_lab.unity
+    path: Assets/Scenes/openingscene.unity
+    guid: 4b4d2d9903ef54bb6b93a976119cf30f
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_1.unity
     guid: 4ee5a2ca12bf54f3985f5ed1e38784fb
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_2.unity
+    guid: 87b765be95976475295872283fcac996
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_3.unity
+    guid: fb5e266ab18e24a62a30d1867ff7d8ed
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_4.unity
+    guid: 89038311d9b8344eeb6d59e09ce116e9
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_5.unity
+    guid: 4a5a00307d49e4391905d19470dbb870
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_6.unity
+    guid: 94d7a7170bfba43d0a248f48039fb9d3
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_7.unity
+    guid: 28804fdbc1be0433792f869cd9cd5db8
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_8.unity
+    guid: 9b4cb90ccd07d42388bd0eee70c16c3d
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_9.unity
+    guid: f076f546289544fc095c170314520b72
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_10.unity
+    guid: 06054ba1a160746d7b02cb734bdd2be7
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_11.unity
+    guid: 2d975761f9dd84a249a186a2f3929d00
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_12.unity
+    guid: 2929f2f8042fe4a72a581a36e09c8e87
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_13.unity
+    guid: c2c0ebd116a524081ba4cbaf862f329b
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_13-a.unity
+    guid: 7559b5332220f4b6db72de934ce2907f
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_14.unity
+    guid: 8fb832a41858143418acb8d06d4a4666
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_15.unity
+    guid: af08478fac2d849e7b34f322140fd3a8
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_16.unity
+    guid: 5774c6e1101e74e8cab229935d5ec698
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_17.unity
+    guid: a6acfc800516248a38b52fedad65532e
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_4-c.unity
+    guid: 4f1c90fd8bd734e18a45099ec7ee5ea4
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_4-a.unity
+    guid: ccfe49fd92c454ce3995cacdc272829a
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_4-b.unity
+    guid: e57512300fb2e44ab822b19613921e86
   m_configObjects: {}

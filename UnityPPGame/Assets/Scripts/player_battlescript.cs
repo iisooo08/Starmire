@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class player_battlescript : MonoBehaviour
 {
@@ -102,6 +103,10 @@ public class player_battlescript : MonoBehaviour
         {
             displayred();
             health--;
+        }
+        if(health <= 0)
+        {
+            SceneManager.LoadScene(10);
         }
         healthbar.value = health;
     }

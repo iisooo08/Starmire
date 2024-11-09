@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class battlemanager_script : MonoBehaviour
 {
     public List<string> fullatklist = new List<string>();
+    public List<GameObject> objlist;
     public List<int> changeorder = new List<int>();
     public List<GameObject> elements = new List<GameObject>(); //list containing one, zero, and bug 
     private int currentindex; //when instantiating the values on the grid, to know which grid should be filled next 
@@ -13,11 +15,31 @@ public class battlemanager_script : MonoBehaviour
     private int nextindex; //to know which element of the fullatklist must be instantiated next 
     public List<GameObject> hpos = new List<GameObject>();
     public List<GameObject> vpos = new List<GameObject>();
-    public static float speed = 0.6f;
+    public float speed;
     public Slider progressbar; 
+    public List<string> extension1a;
+    public List<GameObject> fakeelements = new List<GameObject>();
     void Start()
     {
+        fullatklist.Clear();
+        changeorder.Clear();
         progressbar.maxValue = fullatklist.Count;
+        for(int x = 0; x < objlist[battle_static.battleindex].GetComponent<battle_data>().fullatk.Count; x++)
+        {
+            fullatklist.Add(objlist[battle_static.battleindex].GetComponent<battle_data>().fullatk[x]);
+        }
+        for(int x = 0; x < objlist[battle_static.battleindex].GetComponent<battle_data>().change.Count; x++)
+        {
+            changeorder.Add(objlist[battle_static.battleindex].GetComponent<battle_data>().change[x]);
+        }
+        if(objlist[battle_static.battleindex].GetComponent<battle_data>().extension1b)
+        {
+            for(int x = 0; x < objlist[battle_static.battleindex].GetComponent<battle_data>().extension1.Count; x++)
+            {
+                extension1a.Add(objlist[battle_static.battleindex].GetComponent<battle_data>().extension1[x]);
+            }
+        }
+        speed = objlist[battle_static.battleindex].GetComponent<battle_data>().sp;
         StartCoroutine(AttackFlow());
     }
 
@@ -47,6 +69,8 @@ public class battlemanager_script : MonoBehaviour
                 GameObject.Find("battle_player").GetComponent<player_battlescript>().ChangeSprite();
             }
         }
+        yield return new WaitForSeconds(speed*5);
+        SceneManager.LoadScene(battle_static.prevscene);
     }
 
     public void MoveDown()
@@ -80,12 +104,20 @@ public class battlemanager_script : MonoBehaviour
     public void Instantiate()
     {
         currentindex = 0;
-        for(int x = 0; x < 6; x++)
-        {
-            GameObject newestline = Instantiate(elements[fullatklist[nextindex][x]-'0'], new Vector2(hpos[currentindex].transform.position.x, vpos[0].transform.position.y), Quaternion.identity);
-            newestline.transform.SetParent(vpos[0].transform, worldPositionStays: true);
-            currentindex++;
-        }
+            for(int x = 0; x < 6; x++)
+            {
+                if(int.Parse(extension1a[nextindex][x] + "") == 1)
+                {
+                    GameObject newestline = Instantiate(fakeelements[fullatklist[nextindex][x]-'0'], new Vector2(hpos[currentindex].transform.position.x, vpos[0].transform.position.y), Quaternion.identity);
+                    newestline.transform.SetParent(vpos[0].transform, worldPositionStays: true);
+                }
+                else
+                {
+                    GameObject newestline = Instantiate(elements[fullatklist[nextindex][x]-'0'], new Vector2(hpos[currentindex].transform.position.x, vpos[0].transform.position.y), Quaternion.identity);
+                    newestline.transform.SetParent(vpos[0].transform, worldPositionStays: true);
+                }
+                currentindex++;
+            }
     }
 
     public IEnumerator Remaining()
