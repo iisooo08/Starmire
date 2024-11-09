@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class selectionblock_move : MonoBehaviour
 {
+    public int currentscene;
     private int hslot;
     private int vslot;
     private int hslot2;
@@ -78,6 +80,15 @@ public class selectionblock_move : MonoBehaviour
                 }
             }
             correct();
+        }
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            reset_scenemanager.puzzlescene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(23);
+        }
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            SceneManager.LoadScene(scenemanager.prevscene);
         }
         //grid selection
         if(Input.GetKeyDown(KeyCode.Z))

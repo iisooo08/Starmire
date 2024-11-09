@@ -1230,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb233b89546c4c4faaada481e7e5c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTime: 30
+  startTime: 50
   timerText: {fileID: 510675366}
 --- !u!1 &501465811
 GameObject:
@@ -5928,6 +5928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb61be18a2ebd415a85ea7c8cfbe6208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentscene: 0
   hpos:
   - {fileID: 1423839003}
   - {fileID: 1143774242}

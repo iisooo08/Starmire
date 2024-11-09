@@ -74,4 +74,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/pk/pk_4-b.unity
     guid: e57512300fb2e44ab822b19613921e86
+  - enabled: 1
+    path: Assets/Scenes/puzzleresetscene.unity
+    guid: c6ad6746e31a045739047a3cd3622a13
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_puzzle1-2.unity
+    guid: 3a5fbc033c47142969c302919cfe68ba
   m_configObjects: {}

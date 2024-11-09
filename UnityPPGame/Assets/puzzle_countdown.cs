@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class puzzle_countdown : MonoBehaviour
 {
@@ -37,8 +38,8 @@ public class puzzle_countdown : MonoBehaviour
 
     void TimerFinished()
     {
-        // Action to take when the timer ends
-        Debug.Log("Time's up!");
+        reset_scenemanager.puzzlescene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(23);
     }
 }
 
