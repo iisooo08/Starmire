@@ -29,6 +29,7 @@ public class selectionblock_move : MonoBehaviour
     public AudioSource move2;
     public AudioSource wrong1;
     public AudioSource correct1;
+    public GameObject correctsprite;
     void Awake()
     {
         inventory = new List<GameObject[]>
@@ -46,8 +47,7 @@ public class selectionblock_move : MonoBehaviour
             new int[] {0, 0, 0}
         };
         answers = new List<int[]>
-        {
-            new int[] {1, 6, 4},
+        {new int[] {1, 6, 4},
             new int[] {2, 4, 5},
             new int[] {1, 3, 5},
             new int[] {2, 0, 0}
@@ -79,7 +79,7 @@ public class selectionblock_move : MonoBehaviour
                     }
                 }
             }
-            correct();
+            StartCoroutine(correct());
         }
         if(Input.GetKeyDown(KeyCode.C))
         {
@@ -226,8 +226,11 @@ public class selectionblock_move : MonoBehaviour
     {
         wrong1.Play();
     }
-    void correct()
+    IEnumerator correct()
     {
         correct1.Play();
+        correctsprite.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(scenemanager.prevscene);
     }
 }
