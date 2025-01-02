@@ -5,29 +5,14 @@ using UnityEngine;
 public class openfriendroom_door : MonoBehaviour
 {
     public static int friendroom_keys;
-    public List<string> locked_d;
-    public List<string> unlocked_d;
-    public List<int> effects;
-    public string name;
-    // Start is called before the first frame update
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.CompareTag("player"))
-        {
-            touching = true;
-        }
-    }
+    private bool once;
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
-        if(touching && Input.GetKeyDown(KeyCode.Return) && friendroom_keys == 2)
+        if(friendroom_keys != 2)
         {
-            //trigger unlocked_d dialogue
-        }
-        else if(touching && Input.GetKeyDown(KeyCode.Return) && friendroom_keys != 2)
-        {
-            //trigger locked_d dialogue
+            gameObject.SetActive(false);
         }
     }
 }

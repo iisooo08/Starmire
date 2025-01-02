@@ -36,4 +36,5 @@ public class dialogue_trigger : MonoBehaviour
     {
         touching = false;
     }
+
 }

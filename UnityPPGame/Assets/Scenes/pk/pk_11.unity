@@ -832,63 +832,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 485024430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &116632013
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8027055741707106458, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_Name
-      value: yijunsoldier (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -22.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.77
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8801745069885937715, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
 --- !u!1001 &130355222
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -944,8 +887,35 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8027055741707106458, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 130355224}
   m_SourcePrefab: {fileID: 100100000, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+--- !u!1 &130355223 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027055741707106458, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+  m_PrefabInstance: {fileID: 130355222}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &130355224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130355223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daecdcf36140468ea63f5b9d474b1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguelist:
+  - 'Hey! This is Madame Esva''s tea party! '
+  - I heard a tea party grants benefits so out of this world, you won't be able to
+    understand...
+  - Don't ask who I heard it from! Because I don't know either! Haha.
+  name: Guard
+  effectlist: 030000000300000003000000
 --- !u!1001 &147439696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7022,6 +6992,67 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1052438339
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.0205183
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.741578
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.02184839
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2566612444047492362, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5359179437327437846, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: newMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ba0f32fb6dff243a38b083bd1a7d0dd2, type: 3}
+    - target: {fileID: 7128764569597783630, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
+      propertyPath: m_Name
+      value: musicchanger
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f1bb081ba187a4ef2b92e94ea619d46a, type: 3}
 --- !u!1001 &1082107554
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7309,6 +7340,7 @@ GameObject:
   - component: {fileID: 1125193522}
   - component: {fileID: 1125193521}
   - component: {fileID: 1125193520}
+  - component: {fileID: 1125193523}
   m_Layer: 0
   m_Name: king_stool (1)
   m_TagString: Untagged
@@ -7428,6 +7460,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 485024430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1125193523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125193519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daecdcf36140468ea63f5b9d474b1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguelist:
+  - You wish to join my tea party??? Well well...
+  - Alright, just this once. Because you're the Royal Wizard.
+  - '* The Madame hands you a cup of tea.'
+  - '* Youre progress was saved!'
+  name: 
+  effectlist: 03000000030000000300000003000000
 --- !u!1 &1193398022 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5157376892559673547, guid: 4180172fef7ef4a98bc90f361d4c932f, type: 3}
@@ -7969,7 +8020,7 @@ Transform:
   m_GameObject: {fileID: 1224678718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.59908915, y: 1.6274626, z: -10}
+  m_LocalPosition: {x: -0.18629122, y: 1.6228912, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9155,8 +9206,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8027055741707106458, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1407356123}
   m_SourcePrefab: {fileID: 100100000, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+--- !u!1 &1407356122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8027055741707106458, guid: ae799233a0aa04fc986ded77e392d958, type: 3}
+  m_PrefabInstance: {fileID: 1407356121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1407356123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407356122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daecdcf36140468ea63f5b9d474b1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguelist:
+  - 'Hey, this is the tea party of Lady Vase! '
+  - I heard having a tea party holds mysterious benefits. Benefits that are so out
+    of this world, you probably won't understand.
+  - Huh? Who I heard that from? Well...
+  - I dunno. It's like I knew it from the moment I was born.
+  name: Guard
+  effectlist: 03000000030000000300000003000000
 --- !u!1001 &1407777148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11527,6 +11606,7 @@ GameObject:
   - component: {fileID: 1898702288}
   - component: {fileID: 1898702287}
   - component: {fileID: 1898702286}
+  - component: {fileID: 1898702289}
   m_Layer: 0
   m_Name: king_stool
   m_TagString: Untagged
@@ -11646,6 +11726,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 485024430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1898702289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898702285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6daecdcf36140468ea63f5b9d474b1ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguelist:
+  - '* you ask to join the tea party.'
+  - '* The lady hands you a cup of tea.'
+  - '* Your progress was saved!'
+  name: 
+  effectlist: 030000000300000003000000
 --- !u!1 &1902578758
 GameObject:
   m_ObjectHideFlags: 0
@@ -15350,7 +15448,6 @@ SceneRoots:
   - {fileID: 1371181596}
   - {fileID: 1407356121}
   - {fileID: 147439696}
-  - {fileID: 116632013}
   - {fileID: 1832651777}
   - {fileID: 1407777148}
   - {fileID: 1742768066}
@@ -15359,3 +15456,4 @@ SceneRoots:
   - {fileID: 130355222}
   - {fileID: 1628035059}
   - {fileID: 655007769327095822}
+  - {fileID: 1052438339}

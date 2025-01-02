@@ -8,6 +8,8 @@ public class debug1 : MonoBehaviour
     void Start()
     {
         
+ PlayerPrefs.SetInt("dc1_hasTriggered", 1);
+         PlayerPrefs.SetInt("dc2_hasTriggered", 1);
     }
 
     // Update is called once per frame

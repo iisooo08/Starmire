@@ -16,16 +16,17 @@ public class animation_2 : MonoBehaviour
     private CinemachineVirtualCamera virtualCamera;
     private bool panned = false;
     public Transform player;
-    private bool checkcollider = false;
+    private bool checkcollider = true;
     public AudioClip newClip;
     public AudioClip prevClip;
-    public AudioSource audioSource;
+    private bool musiconce;
 
     // Use a unique key for this animation
-    private const string AnimationPlayedKey1 = "AnimationPlayed1";
+    private const string AnimationPlayedKey1 = "a1_hasTriggered";
 
     void Start()
     {
+        print(PlayerPrefs.GetInt(AnimationPlayedKey1,0));
         // Check if the animation has already been played
         if (PlayerPrefs.GetInt(AnimationPlayedKey1, 0) == 1)
         {
@@ -60,10 +61,12 @@ public class animation_2 : MonoBehaviour
         yield return new WaitForSeconds(1f);
         queenanim.SetTrigger("back");
         yield return StartCoroutine(PanCamera(player));
+        checkcollider = false;
 
         // Mark the animation as played
         PlayerPrefs.SetInt(AnimationPlayedKey1, 1);
-        PlayerPrefs.Save();
+
+        gameObject.SetActive(false);
     }
 
     private IEnumerator DialogueSequence()
@@ -138,6 +141,7 @@ if (musicPlayer != null)
             yield return new WaitForSeconds(panDuration);
             panned = true;
         }
+        if (!checkcollider) yield break;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -152,7 +156,11 @@ if (musicPlayer != null)
 
         musicplayer musicPlayer = FindObjectOfType<musicplayer>();
 
+        if(musiconce == false)
+        {
+musiconce = true;
 musicPlayer.ChangeMusic(newClip);
         StartCoroutine(musicPlayer.FadeIn(1.0f));
+        }
     }
 }

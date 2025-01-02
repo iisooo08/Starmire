@@ -19,19 +19,30 @@ public class dialoguecutscene : MonoBehaviour
 
     private void Start()
     {
-        hasTriggered = PlayerPrefs.GetInt(gameObject.name + "_hasTriggered", 0) == 1;
+        print(PlayerPrefs.GetInt(gameObject.name + "_hasTriggered") + "getint from dcscript");
+        gameObject.SetActive(PlayerPrefs.GetInt(gameObject.name + "_hasTriggered") == 0);
+// if(gameObject.name == "dc1")
+// {
+//     gameObject.SetActive(PlayerPrefs.GetInt("dc1_hasTriggered", 0) == 0); // Inactive if true
+// }
+// else if(gameObject.name == "dc2")
+// {
+//     gameObject.SetActive(PlayerPrefs.GetInt); // Inactive if true
+// }
 
-        if (!hasTriggered)
-        {
-            hasTriggered = true; 
-            PlayerPrefs.SetInt(gameObject.name + "_hasTriggered", 1); 
-            PlayerPrefs.Save(); 
+        // hasTriggered = PlayerPrefs.GetInt(gameObject.name + "_hasTriggered", 0) == 1;
+
+        // if (!hasTriggered)
+        // {
+            // hasTriggered = true; 
+            // PlayerPrefs.SetInt(gameObject.name + "_hasTriggered", 1); 
+            // PlayerPrefs.Save(); 
 
             // Get the Cinemachine virtual camera component
             virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
             StartCoroutine(DialogueSequence());
-        }
+        //}
     }
 
     public IEnumerator DialogueSequence()
@@ -81,6 +92,9 @@ public class dialoguecutscene : MonoBehaviour
 
         player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
+        PlayerPrefs.SetInt(gameObject.name + "_hasTriggered", 1);
+        print(gameObject.name + "hasTriggered");
+        print(PlayerPrefs.GetInt(gameObject.name + "hasTriggered"));
         // Pan back to the player after dialogue
         if (player != null)
         {

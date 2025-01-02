@@ -9,7 +9,7 @@ public class MoveLeft : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.left * speed * Time.deltaTime);
-        if(gameObject.transform.position.x <= -24f)
+        if(gameObject.transform.position.x <= -35f)
         {
             Destroy(gameObject);
         }

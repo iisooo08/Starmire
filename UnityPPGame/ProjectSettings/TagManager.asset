@@ -8,15 +8,16 @@ TagManager:
   - one
   - bug
   - player
+  - snow
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - snow
   - Water
   - UI
   - pp
-  - 
+  - glow
   - 
   - 
   - 

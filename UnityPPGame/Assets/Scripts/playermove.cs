@@ -6,7 +6,7 @@ public class playermove : MonoBehaviour
 {
     public float movespeed = 4f; 
     public Rigidbody2D rb; 
-    Vector2 movement; 
+    public Vector2 movement; 
     public Animator anim; 
 
     // Update is called once per frame

@@ -19,6 +19,7 @@ public class dialoguemanager : MonoBehaviour
     public Rigidbody2D player;
     public AudioSource audio;
     private Coroutine typingCoroutine;
+    private int typingindex;
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class dialoguemanager : MonoBehaviour
 
     public IEnumerator StartDialogue(List<string> dialogue, string name, List<int> effects)
     {
+        typingindex = 0;
         player.constraints = RigidbodyConstraints2D.FreezeAll;
         finish = false;
         returned = false;
@@ -114,6 +116,11 @@ public class dialoguemanager : MonoBehaviour
         generating = true;
         foreach (char letter in current)
         {
+            typingindex++;
+            if(typingindex%2 == 1)
+            {
+                audio.Play();
+            }
             dtext.text += letter;
             yield return new WaitForSeconds(0.05f);
         }

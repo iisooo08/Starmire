@@ -30,6 +30,7 @@ public class selectionblock_move2 : MonoBehaviour
     public AudioSource wrong1;
     public AudioSource correct1;
     public GameObject correctsprite;
+    private bool wrong3;
     void Awake()
     {
         inventory = new List<GameObject[]>
@@ -75,12 +76,15 @@ public class selectionblock_move2 : MonoBehaviour
                 {
                     if(answers[x][y] != grid[x][y])
                     {
+                        wrong3 = true;
                         wrong();
-                        break;
                     }
                 }
             }
-            StartCoroutine(correct());
+            if(wrong3 != true)
+            {
+                StartCoroutine(correct());
+            }
         }
         if(Input.GetKeyDown(KeyCode.C))
         {
@@ -229,6 +233,7 @@ public class selectionblock_move2 : MonoBehaviour
     }
     IEnumerator correct()
     {
+        PlayerPrefs.SetInt("p1a1_solved", 1);
         correct1.Play();
         correctsprite.SetActive(true);
         yield return new WaitForSeconds(2f);

@@ -7,28 +7,26 @@ public class musicplayer : MonoBehaviour
 
     private void Awake()
     {
-        // Check if there's already an instance of musicplayer in the scene
         if (FindObjectsOfType<musicplayer>().Length > 1)
         {
-            Destroy(gameObject); // Prevent duplicates
+            Destroy(gameObject); 
         }
         else
         {
-            DontDestroyOnLoad(gameObject); // Keep this GameObject across scenes
-            audioSource = GetComponent<AudioSource>(); // Assign AudioSource once in Awake
+            DontDestroyOnLoad(gameObject); 
+            audioSource = GetComponent<AudioSource>(); 
         }
     }
 
     public void ChangeMusic(AudioClip newClip)
     {
-        if (audioSource.clip != newClip) // Avoid reloading the same clip
+        if (audioSource.clip != newClip) 
         {
             audioSource.clip = newClip;
             audioSource.Play();
         }
     }
 
-    // Coroutine to fade out the audio
     public IEnumerator FadeOut(float fadeDuration)
     {
         float startVolume = audioSource.volume;
@@ -58,13 +56,11 @@ public class musicplayer : MonoBehaviour
         audioSource.volume = 1;
     }
 
-    // Public method to start fading out
     public void StartFadeOut(float duration)
     {
         StartCoroutine(FadeOut(duration));
     }
 
-    // Public method to start fading in
     public void StartFadeIn(float duration)
     {
         StartCoroutine(FadeIn(duration));
