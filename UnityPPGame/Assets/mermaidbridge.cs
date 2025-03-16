@@ -13,15 +13,22 @@ public class mermaidbridge : MonoBehaviour
     public bool pillar;
 
     // Update is called once per frame
+    void Start()
+    {
+        pillarcount = PlayerPrefs.GetInt("pillarcount", 0);
+        inspector = PlayerPrefs.GetInt("inspector", 0) == 1;
+    }
     void Update()
     {
         if(scholar && touching && Input.GetKeyDown(KeyCode.Return))
         {
             inspector = true;
+            PlayerPrefs.SetInt("inspector", 1);
         }
         if(pillar && inspector && touching && Input.GetKeyDown(KeyCode.Return))
         {
             pillarcount++;
+            PlayerPrefs.SetInt("pillarcount", pillarcount);
             gameObject.SetActive(false);
         }
         if(collider && pillarcount == 2)

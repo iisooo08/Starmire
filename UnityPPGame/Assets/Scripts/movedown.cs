@@ -3,10 +3,14 @@ using UnityEngine;
 public class MoveDown : MonoBehaviour
 {
     public float speed;  
+    public bool notrandom;
 
     void Start()
     {
-        speed = Random.Range(3f, 7f);
+        if(!notrandom)
+        {
+            speed = Random.Range(3f, 7f);
+        }
     }
 
     void Update()

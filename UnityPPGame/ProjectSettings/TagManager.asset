@@ -9,6 +9,8 @@ TagManager:
   - bug
   - player
   - snow
+  - enemy
+  - antierror
   layers:
   - Default
   - TransparentFX

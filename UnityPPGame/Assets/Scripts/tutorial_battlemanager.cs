@@ -70,7 +70,7 @@ public class tutorial_battlemanager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(dialogue4, name, effects));
         yield return new WaitUntil(() => GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().finish);
-        SceneManager.LoadScene(20);
+        SceneManager.LoadScene(29);
     }
 
     public void MoveDown()

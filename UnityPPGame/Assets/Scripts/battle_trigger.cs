@@ -6,11 +6,9 @@ using UnityEngine.SceneManagement;
 public class battle_trigger : MonoBehaviour
 {
     public int battlescene;
-    public static bool battletriggered;
     public bool next;
     public GameObject nextobj;
     public GameObject warningsign;
-    public GameObject bugpiece;
     public int battleind;
     public List<GameObject> blockage = new List<GameObject>();
     public Transform battletransform;
@@ -18,19 +16,17 @@ public class battle_trigger : MonoBehaviour
     {
         if(other.CompareTag("player"))
         {
-            battle_static.battleindex = battleind;
-            battle_static.prevscene = SceneManager.GetActiveScene().buildIndex;
-            battletriggered = true;
+            stat_manager.battlenum = battleind;
+            stat_manager.prevscene = SceneManager.GetActiveScene().buildIndex;
+            PlayerPrefs.SetInt("battletriggered" + battleind, 1);
         }
         SceneManager.LoadScene(battlescene);
     }
     void Start()
     {
-        if(battletriggered == true)
+        if(PlayerPrefs.GetInt("battletriggered" + battleind, 0) == 1)
         {
-            battletriggered = false;
             warningsign.SetActive(false);
-            //bugpiece.SetActive(true);
             if(next)
             {
                 nextobj.SetActive(true);

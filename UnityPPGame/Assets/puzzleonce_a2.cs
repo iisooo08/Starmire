@@ -16,7 +16,6 @@ public class puzzleonce_a2 : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("p1a2_solved", 0) == 1)
         {
-            openfriendroom_door.friendroom_keys++;
             nextscene.SetActive(false);
             puzzlereward.SetActive(true);
             puzzleorb.SetActive(false);

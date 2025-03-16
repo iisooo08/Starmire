@@ -12,13 +12,13 @@ public class player_battlemove : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.RightArrow) && slotnum < 5)
         {
-            move.Play();
+            //move.Play();
             slotnum++;
             transform.position += new Vector3(1.085f, 0f, 0f);
         }
         if(Input.GetKeyDown(KeyCode.LeftArrow) && slotnum > 0)
         {
-            move.Play();
+            //move.Play();
             slotnum--;
             transform.position += new Vector3(-1.085f, 0f, 0f);
         }

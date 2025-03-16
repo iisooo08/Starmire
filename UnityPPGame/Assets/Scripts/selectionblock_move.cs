@@ -232,6 +232,7 @@ public class selectionblock_move : MonoBehaviour
     }
     IEnumerator correct()
     {
+        print("yes");
         //puzzleonce_a2.a2_solved = true;
         PlayerPrefs.SetInt("p1a2_solved", 1);
         correct1.Play();

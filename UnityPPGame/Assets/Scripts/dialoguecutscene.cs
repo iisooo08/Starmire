@@ -9,6 +9,7 @@ public class dialoguecutscene : MonoBehaviour
     public List<string> names; 
     public List<int> effects; 
     private bool hasTriggered; 
+    public bool keeprestrained;
 
     public Transform cameraTarget; // Target for the camera to focus on
     public float panDuration = 1f; // Duration for the camera to pan
@@ -102,6 +103,10 @@ public class dialoguecutscene : MonoBehaviour
         }
                     if(next)
             {
+                if(keeprestrained == true)
+                {
+                    player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;
+                }
                 nextobj.SetActive(true);
             }
     }

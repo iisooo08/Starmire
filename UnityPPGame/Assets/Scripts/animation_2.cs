@@ -22,20 +22,18 @@ public class animation_2 : MonoBehaviour
     private bool musiconce;
 
     // Use a unique key for this animation
-    private const string AnimationPlayedKey1 = "a1_hasTriggered";
 
     void Start()
     {
-        print(PlayerPrefs.GetInt(AnimationPlayedKey1,0));
         // Check if the animation has already been played
-        if (PlayerPrefs.GetInt(AnimationPlayedKey1, 0) == 1)
+        if (PlayerPrefs.GetInt("a2", 0) == 0)
         {
-            checkcollider = false;
-            return; // Exit if the animation has already played
+            checkcollider = true;
+            PlayerPrefs.SetInt("a2", 1);
         }
         else
         {
-            checkcollider = true;
+            checkcollider = false;
         }
 
         virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
@@ -45,8 +43,7 @@ public class animation_2 : MonoBehaviour
     {
         queenanim = queen.GetComponent<Animator>();
 
-    FadeOut();
-        yield return new WaitForSeconds(0.5f);
+    //FadeOut();
         
         if (cameraTarget != null)
         {
@@ -64,7 +61,6 @@ public class animation_2 : MonoBehaviour
         checkcollider = false;
 
         // Mark the animation as played
-        PlayerPrefs.SetInt(AnimationPlayedKey1, 1);
 
         gameObject.SetActive(false);
     }
@@ -148,6 +144,7 @@ if (musicPlayer != null)
     {
         if (other.CompareTag("player") && checkcollider == true)
         {
+            print("triggered");
             StartCoroutine(AnimationSeq());
         }
     }

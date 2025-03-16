@@ -10,8 +10,8 @@ public class itemscript : MonoBehaviour
     {
         if(other.CompareTag("player"))
         {
-            inventory_script.itemslist.Add(item);
-            gameObject.SetActive(false);
+            //teleport itself to the inventory box 
+            //then trigger playerprefs save 
         }
     }
 }

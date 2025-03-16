@@ -86,4 +86,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/pk/pk_puzzle1-1.unity
     guid: 5b99e46242a9449d2844dc903c5ae342
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_16-a.unity
+    guid: 4c4929ab3134943319add233f606a293
+  - enabled: 1
+    path: Assets/Scenes/tutorialbattle.unity
+    guid: 97be855a24cba4f22917b22d9412eb68
+  - enabled: 1
+    path: Assets/Scenes/battle_phase1.unity
+    guid: 0b88c60594e354f68b6818dd9c491b70
+  - enabled: 1
+    path: Assets/Scenes/pk/pk_19.unity
+    guid: f95fe52fb845f4fdf9af1ed46745a4c3
+  - enabled: 1
+    path: Assets/Scenes/rk/rk_2.unity
+    guid: 70beec6d37aa2449397dda89d1471d69
+  - enabled: 1
+    path: Assets/Scenes/battle.unity
+    guid: 1e0e8d94a88c54d17810d56cc85b6e01
   m_configObjects: {}

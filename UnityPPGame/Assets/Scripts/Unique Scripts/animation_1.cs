@@ -12,10 +12,18 @@ public class animation_1 : MonoBehaviour
     public GameObject queen;
     private Animator queenanim;
     public GameObject taskobj;
+    public Rigidbody2D rb;
 
     void Start()
     {
-        StartCoroutine(AnimationSeq());
+        
+        if(PlayerPrefs.GetInt("a1", 0) == 0)
+        {
+            PlayerPrefs.SetInt("a1", 1);
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            StartCoroutine(AnimationSeq());
+        }
+        
     }
 
     IEnumerator AnimationSeq()
@@ -89,7 +97,8 @@ public class animation_1 : MonoBehaviour
                 yield return StartCoroutine(FindObjectOfType<dialoguemanager>().StartDialogue(currentdialogue, prevname, currenteffects));
             }
         }
-        GameObject.Find("playersprite_final").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
         yield return new WaitForSeconds(0.5f);
         taskobj.SetActive(true);

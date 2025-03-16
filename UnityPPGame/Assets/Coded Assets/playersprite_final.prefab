@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2821308146791789961}
   - component: {fileID: 618936058696318782}
   - component: {fileID: 7538388031025723703}
+  - component: {fileID: 5718117764949724143}
   m_Layer: 0
   m_Name: playersprite_final
   m_TagString: player
@@ -211,3 +212,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorybox: {fileID: 0}
+--- !u!114 &5718117764949724143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157376892559673547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1d4403fe66f45d6adfede1d3d78a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9115bf84cde4d49b0b6ebb93fb5da3df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 867555162659312300, guid: 263c35b19b1ac4b31b07d31a31f69df4, type: 3}
+  attack: {fileID: 0}
 --- !u!4 &400893204
 Transform:
   m_ObjectHideFlags: 0
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a24f0a4b2424013ab22bd9ea48678b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attack: {fileID: 3232426042301632516, guid: e21417f8b314441f3b98dd65a22f0f32, type: 3}
+  attack: {fileID: 0}
 --- !u!4 &446607274
 Transform:
   m_ObjectHideFlags: 0
