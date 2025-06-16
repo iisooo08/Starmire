@@ -57,7 +57,7 @@ public class dialoguemanager : MonoBehaviour
         // }
     }
 
-    public IEnumerator StartDialogue(List<string> dialogue, string name, List<int> effects)
+    public IEnumerator StartDialogue(List<string> dialogue, List<string> name, List<int> effects)
     {
         typingindex = 0;
         player.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -68,7 +68,6 @@ public class dialoguemanager : MonoBehaviour
         second = false;
         index = 0;
 
-        ntext.text = name;
         speechbox.SetTrigger("rise");
 
         for (int x = 0; x < dialogue.Count; x++)
@@ -80,6 +79,7 @@ public class dialoguemanager : MonoBehaviour
             index = x;
             dtext.text = "";
             current = dialogue[x];
+            ntext.text = name[x];
 
             if (effects[index] == 0) 
             {

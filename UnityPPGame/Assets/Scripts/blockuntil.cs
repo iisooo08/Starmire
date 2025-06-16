@@ -5,7 +5,7 @@ using UnityEngine;
 public class blockuntil : MonoBehaviour
 {
     public List<string> dialogue = new List<string>();
-    public string name;
+    public List<string> name;
     public List<int> effects = new List<int>();
     // Start is called before the first frame update
     void Start()

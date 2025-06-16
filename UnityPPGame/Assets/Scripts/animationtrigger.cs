@@ -46,7 +46,7 @@ public class animationtrigger : MonoBehaviour
             }
             else 
             {
-                StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(currentdialogue, prevname, currenteffects));
+                StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(currentdialogue, names, currenteffects));
                 yield return new WaitUntil(() => GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().finish);
                 currenteffects.Clear();
                 currentdialogue.Clear();
@@ -57,7 +57,7 @@ public class animationtrigger : MonoBehaviour
             if(x == names.Count - 1)
             {
                 prevname = names[x];
-                StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(currentdialogue, prevname, currenteffects));
+                StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(currentdialogue, names, currenteffects));
                 yield return new WaitUntil(() => GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().finish);
             }
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class dialogue_trigger_sensitive : MonoBehaviour
 {
     public List<string> dialoguelist;
-    public string name; 
+    public List<string> name; 
     private bool touching = false;
     private bool once = false;
     public List<int> effectlist;

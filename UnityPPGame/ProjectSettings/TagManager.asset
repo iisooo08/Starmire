@@ -11,6 +11,11 @@ TagManager:
   - snow
   - enemy
   - antierror
+  - perfect
+  - ok1
+  - ok2
+  - judgezone
+  - playerattack
   layers:
   - Default
   - TransparentFX
@@ -20,7 +25,7 @@ TagManager:
   - UI
   - pp
   - glow
-  - 
+  - ground
   - 
   - 
   - 
