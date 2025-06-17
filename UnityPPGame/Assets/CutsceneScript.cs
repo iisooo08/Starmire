@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CutsceneScript : MonoBehaviour
 {
+    public AudioClip newMusicClip; 
+    public AudioClip oldMusicClip; 
     private bool triggered = false;
 
     public Transform focuspos;
@@ -48,6 +50,11 @@ public class CutsceneScript : MonoBehaviour
 
     IEnumerator BeginCutscene()
     {
+        musicplayer musicPlayer = FindObjectOfType<musicplayer>();
+    if (musicPlayer != null)
+    {
+        musicPlayer.ChangeMusic(newMusicClip);
+    }
         player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         vcam.Follow = focuspos;
         yield return StartCoroutine(GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().StartDialogue(dialogues, names, effects));
@@ -74,5 +81,9 @@ public class CutsceneScript : MonoBehaviour
         player.gameObject.GetComponent<Animator>().SetFloat("Speed", 0f);
         vcam.Follow = player;
         player.gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        if (musicPlayer != null)
+    {
+        musicPlayer.ChangeMusic(oldMusicClip);
+    }
     }
 }

@@ -72,6 +72,18 @@ public static class SaveData
         }
     }
 
+    public static bool hasSaveFile
+    {
+        get => PlayerPrefs.GetInt("hasSaveFile", 0) == 1;
+        set => PlayerPrefs.SetInt("hasSaveFile", value ? 1 : 0);
+    }
+
+    public static bool hasWatchedTitle
+    {
+        get => PlayerPrefs.GetInt("hasWatchedTitle", 0) == 1;
+        set => PlayerPrefs.SetInt("hasWatchedTitle", value ? 1 : 0);
+    }
+
     public static string playerName
     {
         get => PlayerPrefs.GetString("playerName", "DefaultName");
