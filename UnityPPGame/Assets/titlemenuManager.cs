@@ -25,7 +25,7 @@ public class titlemenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.DownArrow) && selectionnum < 3)
+        if(Input.GetKeyDown(KeyCode.DownArrow))
         {
             arrowsfx.Play();
             transform.position = new Vector2(transform.position.x, transform.position.y - 0.9f);
@@ -39,11 +39,7 @@ public class titlemenuManager : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Return) && selectionnum == 0)
         {
-            if (!PlayerPrefs.HasKey("hasSaveFile"))
-            {
-                //message pops up that there is no saved game 
-            }
-            else
+            if (SaveData.hasSaveFile == true)
             {
                 confirmsfx.Play();
                 Continue();
@@ -55,11 +51,6 @@ public class titlemenuManager : MonoBehaviour
             StartCoroutine(NewGame());
         }
         else if(Input.GetKeyDown(KeyCode.Return) && selectionnum == 2)
-        {
-            confirmsfx.Play();
-            Settings();
-        }
-        else if(Input.GetKeyDown(KeyCode.Return) && selectionnum == 3)
         {
             Quit();
         }
@@ -80,12 +71,7 @@ public class titlemenuManager : MonoBehaviour
         SaveData.hasSaveFile = true;
         SaveData.currentScene = 3;
         PlayerPrefs.Save();
-        StartCoroutine(Transition(2));
-    }
-
-    void Settings()
-    {
-        //content 
+        StartCoroutine(Transition(1));
     }
 
     void Quit()

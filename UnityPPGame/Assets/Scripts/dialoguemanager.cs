@@ -112,7 +112,6 @@ public class dialoguemanager : MonoBehaviour
 
     IEnumerator typing()
     {
-        print("typing");
         generating = true;
         foreach (char letter in current)
         {

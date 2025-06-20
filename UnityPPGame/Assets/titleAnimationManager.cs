@@ -8,7 +8,7 @@ public class titleAnimationManager : MonoBehaviour
     public GameObject star;
     public GameObject title;
     public AudioSource sfx;
-    public AudioSource titlesong;
+    private AudioSource titlesong;
     public GameObject credits;
     private List<GameObject> stars = new List<GameObject>();
     public GameObject selection;
@@ -19,6 +19,8 @@ public class titleAnimationManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        titlesong = GameObject.Find("musicplayer").GetComponent<AudioSource>();
+        titlesong.Stop();
         canvas.GetComponent<Animator>().SetTrigger("start");
         if(SaveData.hasWatchedTitle)
         {
