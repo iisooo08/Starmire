@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>3D Sticker – Dancing Floppy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body { height: 100%; margin: 0; background: #0f0f10; }
+    #app { position: fixed; inset: 0; }
+    .hint { position: fixed; left: 12px; bottom: 12px; color: #c7c7cf; font: 12px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; opacity: .8; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div class="hint">Drag to orbit • Scroll to zoom • Space toggles dance</div>
+
+  <script type="module">
+    import * as THREE from 'https://unpkg.com/three@0.160.0/build/three.module.js';
+    import { OrbitControls } from 'https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+    // ---------- Basic scene ----------
+    const root = document.getElementById('app');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(root.clientWidth, root.clientHeight);
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    root.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, root.clientWidth / root.clientHeight, 0.1, 1000);
+    camera.position.set(0, 40, 120);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.target.set(0, 25, 0);
+
+    // ---------- Diamond background (procedural canvas texture) ----------
+    const bgTex = makeDiamondTexture();
+    bgTex.wrapS = bgTex.wrapT = THREE.RepeatWrapping;
+    bgTex.repeat.set(6, 6);
+
+    const bg = new THREE.Mesh(
+      new THREE.PlaneGeometry(600, 400),
+      new THREE.MeshPhysicalMaterial({
+        map: bgTex,
+        roughness: 0.9,
+        metalness: 0,
+        color: 0x0e0e0f,
+        clearcoat: 0,
+        side: THREE.DoubleSide
+      })
+    );
+    bg.position.set(0, 0, -80);
+    scene.add(bg);
+
+    // ---------- Lights ----------
+    scene.add(new THREE.AmbientLight(0xffffff, 0.45));
+
+    const key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(80, 120, 100);
+    scene.add(key);
+
+    const rim = new THREE.DirectionalLight(0xffffff, 0.6);
+    rim.position.set(-120, 80, -60);
+    scene.add(rim);
+
+    // ---------- Materials (soft plastic / sticker vibe) ----------
+    const plastic = (hex, { roughness = 0.35, clearcoat = 1, sheen = 0.25 } = {}) =>
+      new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(hex),
+        roughness, metalness: 0, clearcoat, clearcoatRoughness: 0.2,
+        sheen, sheenRoughness: 0.8, sheenColor: new THREE.Color(hex).multiplyScalar(1.05)
+      });
+
+    const matRed    = plastic(0xd23a2e);
+    const matBlack  = plastic(0x2a2a2c, { roughness: 0.45, clearcoat: 0.6 });
+    const matOffW   = plastic(0xf6f1e8, { roughness: 0.25, clearcoat: 0.8 });
+    const matGray   = plastic(0x595a5c, { roughness: 0.5, clearcoat: 0.5 });
+    const matWhite  = new THREE.MeshBasicMaterial({ color: 0xffffff }); // outline/border
+
+    // ---------- Helpers: rounded shapes ----------
+    function roundedRectPath(w, h, r) {
+      const p = new THREE.Path();
+      const x = -w / 2, y = -h / 2;
+      p.moveTo(x + r, y);
+      p.lineTo(x + w - r, y);
+      p.quadraticCurveTo(x + w, y, x + w, y + r);
+      p.lineTo(x + w, y + h - r);
+      p.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      p.lineTo(x + r, y + h);
+      p.quadraticCurveTo(x, y + h, x, y + h - r);
+      p.lineTo(x, y + r);
+      p.quadraticCurveTo(x, y, x + r, y);
+      return p;
+    }
+
+    function roundedRectShape(w, h, r) {
+      const s = new THREE.Shape();
+      const x = -w / 2, y = -h / 2;
+      s.moveTo(x + r, y);
+      s.lineTo(x + w - r, y);
+      s.quadraticCurveTo(x + w, y, x + w, y + r);
+      s.lineTo(x + w, y + h - r);
+      s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      s.lineTo(x + r, y + h);
+      s.quadraticCurveTo(x, y + h, x, y + h - r);
+      s.lineTo(x, y + r);
+      s.quadraticCurveTo(x, y, x + r, y);
+      return s;
+    }
+
+    function extrude(shape, depth = 8, bevel = 1.8) {
+      return new THREE.ExtrudeGeometry(shape, {
+        depth,
+        bevelEnabled: true,
+        bevelSize: bevel,
+        bevelThickness: bevel,
+        bevelSegments: 6,
+        curveSegments: 32,
+      });
+    }
+
+    // ---------- Build the floppy character ----------
+    const g = new THREE.Group();
+
+    // Red frame with hole (like a bezel)
+    {
+      const outer = roundedRectShape(70, 70, 8);
+      const inner = roundedRectPath(54, 54, 6);
+      outer.holes.push(inner);
+      const geo = extrude(outer, 8, 2.4);
+      const mesh = new THREE.Mesh(geo, matRed);
+      mesh.position.z = -4; // center around body depth
+      g.add(mesh);
+    }
+
+    // Black inner slab (mid body)
+    {
+      const sh = roundedRectShape(54, 54, 6);
+      const geo = extrude(sh, 8, 2.0);
+      const mesh = new THREE.Mesh(geo, matBlack);
+      mesh.position.z = -4; // align with center
+      g.add(mesh);
+    }
+
+    // White sticker panel
+    {
+      const sh = roundedRectShape(48, 24, 5);
+      const geo = extrude(sh, 6, 1.5);
+      const mesh = new THREE.Mesh(geo, matOffW);
+      mesh.position.set(0, -10, 2);
+      g.add(mesh);
+
+      // little rivet dots
+      const dotGeo = new THREE.CylinderGeometry(1.8, 1.8, 3.5, 24);
+      for (let i = -10; i <= 10; i += 10) {
+        const d = new THREE.Mesh(dotGeo, matGray);
+        d.rotation.x = Math.PI / 2;
+        d.position.set(i, -10, 7); // sit on top of sticker panel
+        g.add(d);
+      }
+    }
+
+    // Disk window (top-left)
+    {
+      const sh = roundedRectShape(26, 26, 4);
+      const geo = extrude(sh, 6, 1.3);
+      const mesh = new THREE.Mesh(geo, matGray);
+      mesh.position.set(-14, 18, 4);
+      g.add(mesh);
+
+      const eye = new THREE.Mesh(new THREE.CylinderGeometry(6, 6, 4.5, 48), matOffW);
+      eye.rotation.x = Math.PI / 2;
+      eye.position.set(-14, 18, 8);
+      g.add(eye);
+
+      const pupil = new THREE.Mesh(new THREE.CylinderGeometry(1.8, 1.8, 5.2, 32), plastic(0xee3a3a, { roughness: 0.3 }));
+      pupil.rotation.x = Math.PI / 2;
+      pupil.position.set(-10.2, 18, 8.6);
+      g.add(pupil);
+    }
+
+    // Limbs (capsules)
+    const limbMat = matOffW;
+    function limb(len, rad) {
+      return new THREE.Mesh(new THREE.CapsuleGeometry(rad, Math.max(0, len - 2 * rad), 8, 32), limbMat);
+    }
+
+    // left arm
+    const armL = limb(46, 4.5); armL.position.set(-46, -2, 0); armL.rotation.z = Math.PI * 0.06; armL.rotation.y = -0.2; g.add(armL);
+    // right arm
+    const armR = limb(60,

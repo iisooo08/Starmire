@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -7,49 +6,50 @@ using UnityEngine.SceneManagement;
 public class save : MonoBehaviour
 {
     private bool touching;
-    public GameObject savemonitor;
-    public TextMeshProUGUI savetext;
     public string currentlocation;
     private bool savescreenon = false;
-    public Rigidbody2D rb;
-    // Start is called before the first frame update
+    public Rigidbody2D playerRb;
+    public Transform playerTransform;
+
     void Awake()
     {
-        SaveData.LoadCutscenes();
-        SaveData.LoadStartDialogues();
+        SaveData.LoadAll();
     }
+
     void Update()
     {
-        if(touching && Input.GetKeyDown(KeyCode.Return))
+        if (touching && Input.GetKeyDown(KeyCode.Return) && !savescreenon)
         {
             StartCoroutine(SaveFunct());
         }
-        if(savescreenon && Input.GetKeyDown(KeyCode.Return))
+
+        if (savescreenon && Input.GetKeyDown(KeyCode.Return))
         {
             savescreenon = false;
-            savemonitor.SetActive(false);
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
     IEnumerator SaveFunct()
     {
-        rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        savetext.text = "<Memory Saver>";
-        savemonitor.SetActive(true);
+        playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
+
         yield return new WaitForSeconds(1f);
+
         Save();
-        savetext.text = "saved memories of " + SaveData.playerName + " at [" + currentlocation + "]";
+
         savescreenon = true;
     }
+
     void Save()
     {
         SaveData.currentScene = SceneManager.GetActiveScene().buildIndex;
-        SaveData.currentPosition = transform.position;
+        SaveData.currentPosition = playerTransform.position;
+        SaveData.hasSaveFile = true;
         SaveData.SaveAll();
-        SaveData.SaveCutscenes();
-        SaveData.SaveStartDialogues();
+        Debug.Log("saved");
     }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("player"))
@@ -57,8 +57,12 @@ public class save : MonoBehaviour
             touching = true;
         }
     }
-    void OnCollisionExit2D()
+
+    void OnCollisionExit2D(Collision2D collision)
     {
-        touching = false;
+        if (collision.gameObject.CompareTag("player"))
+        {
+            touching = false;
+        }
     }
 }

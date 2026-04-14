@@ -12,6 +12,8 @@ public class titlemenuManager : MonoBehaviour
     public GameObject starmark;
     public AudioSource arrowsfx;
     public AudioSource confirmsfx;
+    public Transform continuepos;
+    public Transform newgamepos; 
     // Start is called before the first frame update
     void Start()
     {
@@ -25,16 +27,16 @@ public class titlemenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.DownArrow))
+        if(Input.GetKeyDown(KeyCode.DownArrow) && selectionnum < 2)
         {
             arrowsfx.Play();
-            transform.position = new Vector2(transform.position.x, transform.position.y - 0.9f);
+            transform.position = new Vector2(transform.position.x, transform.position.y + (newgamepos.position.y - continuepos.position.y));
             selectionnum++;
         }
         if(Input.GetKeyDown(KeyCode.UpArrow) && selectionnum > 0)
         {
             arrowsfx.Play();
-            transform.position = new Vector2(transform.position.x, transform.position.y + 0.9f);
+            transform.position = new Vector2(transform.position.x, transform.position.y - (newgamepos.position.y - continuepos.position.y));
             selectionnum--;
         }
         if(Input.GetKeyDown(KeyCode.Return) && selectionnum == 0)

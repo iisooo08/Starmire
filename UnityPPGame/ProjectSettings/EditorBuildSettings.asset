@@ -63,6 +63,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Planet1/16_launchpadroom.unity
     guid: 2919b39a4f21e481cb3757ed27e294bd
   - enabled: 1
+    path: Assets/Scenes/Planet1/17_facilitylobby.unity
+    guid: 3793ea4eec5934e2b96b40e44a55fd88
+  - enabled: 1
+    path: Assets/Scenes/Planet1/18_cctvroom.unity
+    guid: c9f81513419694f559dd2d3f89a1815e
+  - enabled: 1
     path: Assets/Scenes/BattleScenes/Battle2.unity
     guid: 219a436ca9d994f8f9afc54912add302
   m_configObjects: {}

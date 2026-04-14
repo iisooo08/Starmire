@@ -20,31 +20,70 @@ public class DictionaryWrapper
     public DictionaryWrapper(string json)
     {
         var wrapper = JsonUtility.FromJson<DictionaryWrapper>(json);
-        keys = wrapper.keys;
-        values = wrapper.values;
+
+        if (wrapper != null)
+        {
+            keys = wrapper.keys ?? new List<string>();
+            values = wrapper.values ?? new List<bool>();
+        }
+        else
+        {
+            keys = new List<string>();
+            values = new List<bool>();
+        }
     }
 
     public Dictionary<string, bool> ToDictionary()
     {
         Dictionary<string, bool> result = new Dictionary<string, bool>();
-        for (int i = 0; i < keys.Count; i++)
+
+        int count = Mathf.Min(keys.Count, values.Count);
+
+        for (int i = 0; i < count; i++)
         {
             result[keys[i]] = values[i];
         }
+
         return result;
     }
 }
 
 public static class SaveData
 {
+    public static int playerLevel = 1;
+    public static int currentScene = 0;
+    public static Vector3 currentPosition = Vector3.zero;
+    public static bool hasSaveFile = false;
+    public static bool hasWatchedTitle = false;
+    public static string playerName = "DefaultName";
+
     public static CutsceneStorage cutsceneStorage = new CutsceneStorage();
     public static StartDialogueStorage startDialogueStorage = new StartDialogueStorage();
+    public static TaskStorage taskStorage = new TaskStorage();
+
+    public static void SaveTasks()
+    {
+        string json = JsonUtility.ToJson(new DictionaryWrapper(taskStorage.flags));
+        PlayerPrefs.SetString("taskStorage", json);
+    }
+
+    public static void LoadTasks()
+    {
+        if (PlayerPrefs.HasKey("taskStorage"))
+        {
+            string json = PlayerPrefs.GetString("taskStorage");
+            taskStorage.flags = new DictionaryWrapper(json).ToDictionary();
+        }
+        else
+        {
+            taskStorage = new TaskStorage();
+        }
+    }
 
     public static void SaveCutscenes()
     {
         string json = JsonUtility.ToJson(new DictionaryWrapper(cutsceneStorage.flags));
         PlayerPrefs.SetString("cutsceneStorage", json);
-        PlayerPrefs.Save(); 
     }
 
     public static void LoadCutscenes()
@@ -54,78 +93,82 @@ public static class SaveData
             string json = PlayerPrefs.GetString("cutsceneStorage");
             cutsceneStorage.flags = new DictionaryWrapper(json).ToDictionary();
         }
+        else
+        {
+            cutsceneStorage = new CutsceneStorage();
+        }
     }
 
     public static void SaveStartDialogues()
     {
         string json = JsonUtility.ToJson(new DictionaryWrapper(startDialogueStorage.flags));
         PlayerPrefs.SetString("startDialogueStorage", json);
-        PlayerPrefs.Save(); 
     }
 
-    public static void LoadStartDialogues()
+public static void LoadStartDialogues()
+{
+    if (PlayerPrefs.HasKey("startDialogueStorage"))
     {
-        if (PlayerPrefs.HasKey("startDialogueStorage"))
-        {
-            string json = PlayerPrefs.GetString("startDialogueStorage");
-            startDialogueStorage.flags = new DictionaryWrapper(json).ToDictionary();
-        }
+        string json = PlayerPrefs.GetString("startDialogueStorage");
+        startDialogueStorage.flags = new DictionaryWrapper(json).ToDictionary();
     }
-
-    public static bool hasSaveFile
+    else
     {
-        get => PlayerPrefs.GetInt("hasSaveFile", 0) == 1;
-        set => PlayerPrefs.SetInt("hasSaveFile", value ? 1 : 0);
+        startDialogueStorage = new StartDialogueStorage();
     }
-
-    public static bool hasWatchedTitle
-    {
-        get => PlayerPrefs.GetInt("hasWatchedTitle", 0) == 1;
-        set => PlayerPrefs.SetInt("hasWatchedTitle", value ? 1 : 0);
-    }
-
-    public static string playerName
-    {
-        get => PlayerPrefs.GetString("playerName", "DefaultName");
-        set => PlayerPrefs.SetString("playerName", value);
-    }
-
-    public static int playerLevel
-    {
-        get => PlayerPrefs.GetInt("playerLevel", 1);
-        set => PlayerPrefs.SetInt("playerLevel", value);
-    }
-
-    public static int currentScene
-    {
-        get => PlayerPrefs.GetInt("currentScene", 0);
-        set => PlayerPrefs.SetInt("currentScene", value);
-    }
-
-    public static Vector3 currentPosition
-    {
-        get
-        {
-            float x = PlayerPrefs.GetFloat("posX", 0f);
-            float y = PlayerPrefs.GetFloat("posY", 0f);
-            float z = PlayerPrefs.GetFloat("posZ", 0f);
-            return new Vector3(x, y, z);
-        }
-        set
-        {
-            PlayerPrefs.SetFloat("posX", value.x);
-            PlayerPrefs.SetFloat("posY", value.y);
-            PlayerPrefs.SetFloat("posZ", value.z);
-        }
-    }
+}
 
     public static void SaveAll()
     {
+        PlayerPrefs.SetInt("playerLevel", playerLevel);
+        PlayerPrefs.SetInt("currentScene", currentScene);
+        PlayerPrefs.SetFloat("posX", currentPosition.x);
+        PlayerPrefs.SetFloat("posY", currentPosition.y);
+        PlayerPrefs.SetFloat("posZ", currentPosition.z);
+        PlayerPrefs.SetInt("hasSaveFile", hasSaveFile ? 1 : 0);
+        PlayerPrefs.SetInt("hasWatchedTitle", hasWatchedTitle ? 1 : 0);
+        PlayerPrefs.SetString("playerName", playerName);
+
+        SaveTasks();
+        SaveCutscenes();
+        SaveStartDialogues();
+
         PlayerPrefs.Save();
     }
 
-    public static void ResetAll()
+    public static void LoadAll()
     {
-        PlayerPrefs.DeleteAll();
+        playerLevel = PlayerPrefs.GetInt("playerLevel", 1);
+        currentScene = PlayerPrefs.GetInt("currentScene", 0);
+
+        float x = PlayerPrefs.GetFloat("posX", 0f);
+        float y = PlayerPrefs.GetFloat("posY", 0f);
+        float z = PlayerPrefs.GetFloat("posZ", 0f);
+        currentPosition = new Vector3(x, y, z);
+
+        hasSaveFile = PlayerPrefs.GetInt("hasSaveFile", 0) == 1;
+        hasWatchedTitle = PlayerPrefs.GetInt("hasWatchedTitle", 0) == 1;
+        playerName = PlayerPrefs.GetString("playerName", "DefaultName");
+
+        LoadTasks();
+        LoadCutscenes();
+        LoadStartDialogues();
     }
+
+public static void ResetAll()
+{
+    PlayerPrefs.DeleteAll();
+    PlayerPrefs.Save();
+
+    playerLevel = 1;
+    currentScene = 0;
+    currentPosition = Vector3.zero;
+    hasSaveFile = false;
+    hasWatchedTitle = false;
+    playerName = "DefaultName";
+
+    cutsceneStorage = new CutsceneStorage();
+    startDialogueStorage = new StartDialogueStorage();
+    taskStorage = new TaskStorage();
+}
 }

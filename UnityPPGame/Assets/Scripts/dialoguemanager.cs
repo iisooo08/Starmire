@@ -41,23 +41,26 @@ public class dialoguemanager : MonoBehaviour
             generating = false;
             ended = true;
         }
-        // else if (generating && Input.GetKeyDown(KeyCode.Return) && index == 0 && !second)
-        // {
-        //     second = true;
-        // }
-        // else if (generating && Input.GetKeyDown(KeyCode.Return) && index == 0 && second)
-        // {
-        //     second = false;
-        //     StopCoroutine(typingCoroutine);
-        //     typingCoroutine = null;
-        //     print("typing is stopped");
-        //     dtext.text = current;
-        //     generating = false;
-        //     ended = true;
-        // }
     }
 
+    // public void CheckMenu()
+    // {
+    //     if(GameObject.Find("eventbook").GetComponent<taskbookScript>().taskActive == false)
+    //     {
+    //         StartCoroutine(StartDialogue());
+    //     }
+    // }
+
     public IEnumerator StartDialogue(List<string> dialogue, List<string> name, List<int> effects)
+    {
+        if(GameObject.Find("taskbook").GetComponent<taskbookScript>().taskActive == false)
+        {
+            StartCoroutine(RealDialogue(dialogue, name, effects));
+        }
+        yield break;
+    }
+
+    public IEnumerator RealDialogue(List<string> dialogue, List<string> name, List<int> effects)
     {
         typingindex = 0;
         player.constraints = RigidbodyConstraints2D.FreezeAll;
