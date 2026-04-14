@@ -11,11 +11,6 @@ public class save : MonoBehaviour
     public Rigidbody2D playerRb;
     public Transform playerTransform;
 
-    void Awake()
-    {
-        SaveData.LoadAll();
-    }
-
     void Update()
     {
         if (touching && Input.GetKeyDown(KeyCode.Return) && !savescreenon)

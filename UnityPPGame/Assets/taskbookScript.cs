@@ -9,16 +9,10 @@ public class taskbookScript : MonoBehaviour
     private string taskText;
     public GameObject taskBox;
     public TextMeshProUGUI displayText;
-    
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-        UpdateTaskText();
-    }
 
     void Start()
     {
-        displayText.text = taskText;
+        UpdateTaskText();
     }
 
     void Update()

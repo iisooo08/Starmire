@@ -15,6 +15,12 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroScenes/StoryScene.unity
     guid: 948cb6b0541c04d33a076bc38a915c8b
   - enabled: 1
+    path: Assets/Scenes/Reusables/reusable_animations.unity
+    guid: 8bc4c8801b1d247b7b4ef16e48700011
+  - enabled: 1
+    path: Assets/Scenes/1/home_friendroom.unity
+    guid: 6f6719609a10d4e81ac784953b933c70
+  - enabled: 1
     path: Assets/Scenes/Planet1/1_playerhome.unity
     guid: 8e3671fa1c0224e5cbb646fd78646788
   - enabled: 1
