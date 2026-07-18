@@ -48,8 +48,41 @@ public class DictionaryWrapper
     }
 }
 
+public class ItemStorage
+{
+    public Dictionary<string, bool> flags = new Dictionary<string, bool>()
+    {
+        { "item_1", false },
+        { "item_2", false },
+        { "item_3", false },
+        { "item_4", false },
+        { "item_5", false },
+        { "item_6", false },
+        { "item_7", false },
+        { "item_8", false }
+    };
+}
+
 public static class SaveData
 {
+    public static ItemStorage itemStorage = new ItemStorage();
+    public static string[] availableWeapons =
+    {
+        "weapon_1",
+        "weapon_2",
+        "weapon_3",
+        "weapon_4"
+    };
+    public static string[] availableArmor =
+    {
+        "armor_1",
+        "armor_2",
+        "armor_3",
+        "armor_4"
+    };
+    public static string currentWeapon = "BaseWand";
+    public static string currentArmor = "Robes";
+
     public static int playerLevel = 1;
     public static int currentScene = 0;
     public static Vector3 currentPosition = Vector3.zero;
@@ -60,6 +93,7 @@ public static class SaveData
     public static CutsceneStorage cutsceneStorage = new CutsceneStorage();
     public static StartDialogueStorage startDialogueStorage = new StartDialogueStorage();
     public static TaskStorage taskStorage = new TaskStorage();
+    public static AnimationStorage animationStorage = new AnimationStorage();
 
     public static void SaveTasks()
     {
@@ -118,6 +152,132 @@ public static void LoadStartDialogues()
     }
 }
 
+    public static void SaveAnimations()
+    {
+        string json = JsonUtility.ToJson(new DictionaryWrapper(animationStorage.flags));
+        PlayerPrefs.SetString("animationStorage", json);
+    }
+    
+    public static void LoadAnimations()
+{
+    if (PlayerPrefs.HasKey("animationStorage"))
+    {
+        string json = PlayerPrefs.GetString("animationStorage");
+        animationStorage.flags = new DictionaryWrapper(json).ToDictionary();
+    }
+    else
+    {
+        animationStorage = new AnimationStorage();
+    }
+}
+public static void SaveItems()
+{
+    string json = JsonUtility.ToJson(new DictionaryWrapper(itemStorage.flags));
+    PlayerPrefs.SetString("itemStorage", json);
+}
+
+public static void LoadItems()
+{
+    itemStorage = new ItemStorage();
+
+    if (PlayerPrefs.HasKey("itemStorage"))
+    {
+        string json = PlayerPrefs.GetString("itemStorage");
+        Dictionary<string, bool> loadedItems = new DictionaryWrapper(json).ToDictionary();
+
+        foreach (var item in loadedItems)
+        {
+            if (itemStorage.flags.ContainsKey(item.Key))
+            {
+                itemStorage.flags[item.Key] = item.Value;
+            }
+        }
+    }
+}
+
+public static void GetItem(string itemName)
+{
+    if (itemStorage.flags.ContainsKey(itemName))
+    {
+        itemStorage.flags[itemName] = true;
+        SaveAll();
+    }
+    else
+    {
+        Debug.LogWarning("Item does not exist: " + itemName);
+    }
+}
+
+public static bool HasItem(string itemName)
+{
+    return itemStorage.flags.ContainsKey(itemName) && itemStorage.flags[itemName];
+}
+
+public static void SaveEquipment()
+{
+    PlayerPrefs.SetString("currentWeapon", currentWeapon);
+    PlayerPrefs.SetString("currentArmor", currentArmor);
+}
+
+public static void LoadEquipment()
+{
+    currentWeapon = PlayerPrefs.GetString("currentWeapon", "None");
+    currentArmor = PlayerPrefs.GetString("currentArmor", "None");
+
+    if (!IsValidEquipment(currentWeapon, availableWeapons))
+    {
+        currentWeapon = "None";
+    }
+
+    if (!IsValidEquipment(currentArmor, availableArmor))
+    {
+        currentArmor = "None";
+    }
+}
+
+private static bool IsValidEquipment(string equipmentName, string[] equipmentList)
+{
+    if (equipmentName == "None")
+    {
+        return true;
+    }
+
+    foreach (string equipment in equipmentList)
+    {
+        if (equipment == equipmentName)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+public static void SetWeapon(string weaponName)
+{
+    if (IsValidEquipment(weaponName, availableWeapons))
+    {
+        currentWeapon = weaponName;
+        SaveAll();
+    }
+    else
+    {
+        Debug.LogWarning("Weapon does not exist: " + weaponName);
+    }
+}
+
+public static void SetArmor(string armorName)
+{
+    if (IsValidEquipment(armorName, availableArmor))
+    {
+        currentArmor = armorName;
+        SaveAll();
+    }
+    else
+    {
+        Debug.LogWarning("Armor does not exist: " + armorName);
+    }
+}
     public static void SaveAll()
     {
         PlayerPrefs.SetInt("playerLevel", playerLevel);
@@ -132,6 +292,9 @@ public static void LoadStartDialogues()
         SaveTasks();
         SaveCutscenes();
         SaveStartDialogues();
+        SaveAnimations();
+        SaveItems();
+        SaveEquipment();
 
         PlayerPrefs.Save();
     }
@@ -153,6 +316,9 @@ public static void LoadStartDialogues()
         LoadTasks();
         LoadCutscenes();
         LoadStartDialogues();
+        LoadAnimations();
+        LoadItems();
+        LoadEquipment();
     }
 
 public static void ResetAll()
@@ -170,5 +336,11 @@ public static void ResetAll()
     cutsceneStorage = new CutsceneStorage();
     startDialogueStorage = new StartDialogueStorage();
     taskStorage = new TaskStorage();
+    animationStorage = new AnimationStorage();
+
+    itemStorage = new ItemStorage();
+
+    currentWeapon = "BaseWand";
+    currentArmor = "Robes";
 }
 }

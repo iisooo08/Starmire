@@ -18,63 +18,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Reusables/reusable_animations.unity
     guid: 8bc4c8801b1d247b7b4ef16e48700011
   - enabled: 1
-    path: Assets/Scenes/1/home_friendroom.unity
+    path: Assets/Scenes/1/home_1_friendroom.unity
+    guid: ca7c65528f48c4bdc89b1e1bbb42174d
+  - enabled: 1
+    path: Assets/Scenes/1/home_2_livingroom.unity
     guid: 6f6719609a10d4e81ac784953b933c70
   - enabled: 1
-    path: Assets/Scenes/Planet1/1_playerhome.unity
-    guid: 8e3671fa1c0224e5cbb646fd78646788
+    path: Assets/Scenes/1/home_3_hallway.unity
+    guid: 39233687734044744ba0350600e067bd
   - enabled: 1
-    path: Assets/Scenes/Planet1/2_crossroads.unity
-    guid: d7843dd7069c14705b1f29ebe37dc11a
+    path: Assets/Scenes/1/home_4_playerroom.unity
+    guid: 2cc95fbfb4c954568a1530a2d808e68a
   - enabled: 1
-    path: Assets/Scenes/Planet1/3_gasstation.unity
-    guid: b76df456fc2dd4fcd840846b1688b03d
+    path: Assets/Scenes/1/home_5_bathroom.unity
+    guid: 843174631e1994d419667ba9f02972ff
   - enabled: 1
-    path: Assets/Scenes/Planet1/4_archeologysite.unity
-    guid: 605362d4dcbef4f5ba105a79f577d726
-  - enabled: 1
-    path: Assets/Scenes/Planet1/5_ruinsentrance.unity
-    guid: 1e34ef564facf4291aa43902c5aa6e17
-  - enabled: 1
-    path: Assets/Scenes/Planet1/6_livingroom.unity
-    guid: dc9b69b9ea2244b61a6fd9ef2a3f3411
-  - enabled: 1
-    path: Assets/Scenes/Planet1/7_bedroom.unity
-    guid: 80ad3e34d6dcf478ea93c0a274651ceb
-  - enabled: 1
-    path: Assets/Scenes/Planet1/8_basemententrancec.unity
-    guid: d346cf11935ee49bab4eccff7cc54186
-  - enabled: 1
-    path: Assets/Scenes/Planet1/9_ruinsentrance.unity
-    guid: a0d21e95f1186498bae7e279da11bd92
-  - enabled: 1
-    path: Assets/Scenes/Planet1/10_firstkeyroom.unity
-    guid: baa055fbb6b674c45b3c29a656abccf4
-  - enabled: 1
-    path: Assets/Scenes/Planet1/11_crossroad.unity
-    guid: 2e3f8cf4f8f604888bff1895869870b9
-  - enabled: 1
-    path: Assets/Scenes/Planet1/12_firstpuzzleroom.unity
-    guid: 6bf21de2f241a40498b1ab42dfda6b80
-  - enabled: 1
-    path: Assets/Scenes/Planet1/13_secondpuzzleroom.unity
-    guid: 93762e0ed56904511aa34e6502492b8c
-  - enabled: 1
-    path: Assets/Scenes/Planet1/14_restingroom.unity
-    guid: 28ce9fe1ef631473982bbecf69d3ed9c
-  - enabled: 1
-    path: Assets/Scenes/Planet1/15_thirdpuzzleroom.unity
-    guid: df9791fe06a91407ca239b745b3b424f
-  - enabled: 1
-    path: Assets/Scenes/Planet1/16_launchpadroom.unity
-    guid: 2919b39a4f21e481cb3757ed27e294bd
-  - enabled: 1
-    path: Assets/Scenes/Planet1/17_facilitylobby.unity
-    guid: 3793ea4eec5934e2b96b40e44a55fd88
-  - enabled: 1
-    path: Assets/Scenes/Planet1/18_cctvroom.unity
-    guid: c9f81513419694f559dd2d3f89a1815e
-  - enabled: 1
-    path: Assets/Scenes/BattleScenes/Battle2.unity
-    guid: 219a436ca9d994f8f9afc54912add302
+    path: Assets/Scenes/1/home_6_garden.unity
+    guid: f4c6923110dce49eeb9b8e162b96f42e
   m_configObjects: {}

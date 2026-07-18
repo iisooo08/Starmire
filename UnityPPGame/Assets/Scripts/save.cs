@@ -6,43 +6,28 @@ using UnityEngine.SceneManagement;
 public class save : MonoBehaviour
 {
     private bool touching;
-    public string currentlocation;
-    private bool savescreenon = false;
+    public bool savescreenon = false;
     public Rigidbody2D playerRb;
     public Transform playerTransform;
+
+    void Start()
+    {//add conditional statement that onlyd oes this once
+        SaveData.LoadAll();
+    }
 
     void Update()
     {
         if (touching && Input.GetKeyDown(KeyCode.Return) && !savescreenon)
         {
-            StartCoroutine(SaveFunct());
-        }
-
-        if (savescreenon && Input.GetKeyDown(KeyCode.Return))
-        {
-            savescreenon = false;
-            playerRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            SaveFunct();
         }
     }
 
-    IEnumerator SaveFunct()
+    void SaveFunct()
     {
         playerRb.constraints = RigidbodyConstraints2D.FreezeAll;
-
-        yield return new WaitForSeconds(1f);
-
-        Save();
-
+        GameObject.Find("savescreen").GetComponent<UI_savescreen>().SaveScreenFunct();
         savescreenon = true;
-    }
-
-    void Save()
-    {
-        SaveData.currentScene = SceneManager.GetActiveScene().buildIndex;
-        SaveData.currentPosition = playerTransform.position;
-        SaveData.hasSaveFile = true;
-        SaveData.SaveAll();
-        Debug.Log("saved");
     }
 
     void OnCollisionEnter2D(Collision2D collision)

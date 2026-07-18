@@ -104,4 +104,15 @@ public class PlayermoveBattle : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         cooltime = true;
     }
+
+    public void FreezeBody()
+    {
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+    }
+
+    public void UnfreezeBody()
+    {
+        rb.constraints = RigidbodyConstraints2D.None;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
 }

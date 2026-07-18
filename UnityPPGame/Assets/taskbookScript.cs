@@ -17,13 +17,15 @@ public class taskbookScript : MonoBehaviour
 
     void Update()
     {
-        if(!taskActive && Input.GetKeyDown(KeyCode.E) && GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().finish)
+        if(!taskActive && Input.GetKeyDown(KeyCode.E) && GameObject.Find("dialoguemanager").GetComponent<dialoguemanager>().finish && !GameObject.Find("itemscreen").GetComponent<UI_itemscreen>().isactive)
         {
+            GameObject.Find("playersprite_final").GetComponent<PlayermoveBattle>().FreezeBody();
             taskActive = true;
             taskBox.SetActive(true);
         }
         else if(taskActive && Input.GetKeyDown(KeyCode.E))
         {
+            GameObject.Find("playersprite_final").GetComponent<PlayermoveBattle>().UnfreezeBody();
             taskActive = false;
             taskBox.SetActive(false);
         }
