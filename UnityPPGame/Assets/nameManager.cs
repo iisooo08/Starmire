@@ -155,7 +155,7 @@ public class nameManager : MonoBehaviour
     {
         canvas.SetTrigger("end");
         yield return new WaitForSeconds(0.25f);
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(11);
     }
 
     void UpdateLetters()

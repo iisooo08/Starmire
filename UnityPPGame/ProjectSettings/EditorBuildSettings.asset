@@ -36,6 +36,9 @@ EditorBuildSettings:
     path: Assets/Scenes/1/home_6_garden.unity
     guid: f4c6923110dce49eeb9b8e162b96f42e
   - enabled: 1
+    path: Assets/Scenes/Planet2/pk_1.unity
+    guid: 4ee5a2ca12bf54f3985f5ed1e38784fb
+  - enabled: 1
     path: Assets/Scenes/Planet2/pk_2.unity
     guid: 87b765be95976475295872283fcac996
   - enabled: 1
