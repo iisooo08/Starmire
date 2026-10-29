@@ -1,19 +1,18 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UI_savescreen : MonoBehaviour
 {
-    // 0: save screen closed
-    // 1: vertical save-slot selection
-    // 2: horizontal Save/Cancel selection
-    // 3: final "saved" text
     private int stage = 0;
 
     private bool canUseReturn = true;
-
-    private int verticalnum = 0;
     private int horizontalnum = 0;
+
+    [Header("Save File Info")]
+    public TMP_Text playerNameText;
+    public TMP_Text locationText;
+    public TMP_Text playtimeText;
 
     [Header("Menu Objects")]
     public GameObject savemenu;
@@ -21,12 +20,11 @@ public class UI_savescreen : MonoBehaviour
 
     [Header("Arrow")]
     public Transform arrowtransform;
-    public List<Transform> verticalpos;
     public Transform leftpos;
     public Transform rightpos;
 
     [Header("Text")]
-    public List<GameObject> firsttexts;
+    public GameObject firsttext;
     public GameObject savetext;
     public GameObject canceltext;
     public GameObject thirdtext;
@@ -50,6 +48,7 @@ public class UI_savescreen : MonoBehaviour
             }
         }
 
+
         if (playerRigidbody != null)
         {
             originalConstraints = playerRigidbody.constraints;
@@ -58,28 +57,26 @@ public class UI_savescreen : MonoBehaviour
         SetStage(0);
     }
 
+
     public void SaveScreenFunct()
     {
-        // Prevent the menu from reopening while already open.
         if (stage != 0)
         {
             return;
         }
 
-        verticalnum = 0;
         horizontalnum = 0;
+
+        UpdateSaveSlotText();
 
         FreezePlayer();
         SetStage(1);
 
-        // Prevent the Return press that opened the menu
-        // from immediately selecting the first option.
         canUseReturn = false;
     }
 
     void Update()
     {
-        // Allow Return again only after it has been released.
         if (!canUseReturn && Input.GetKeyUp(KeyCode.Return))
         {
             canUseReturn = true;
@@ -101,29 +98,7 @@ public class UI_savescreen : MonoBehaviour
 
     void HandleMovement()
     {
-        // Stage 1: move between save slots vertically.
-        if (stage == 1)
-        {
-            if (
-                Input.GetKeyDown(KeyCode.UpArrow) &&
-                verticalnum > 0
-            )
-            {
-                verticalnum--;
-                MoveArrowToVerticalPosition();
-            }
-            else if (
-                Input.GetKeyDown(KeyCode.DownArrow) &&
-                verticalnum < verticalpos.Count - 1
-            )
-            {
-                verticalnum++;
-                MoveArrowToVerticalPosition();
-            }
-        }
-
-        // Stage 2: choose Save or Cancel horizontally.
-        else if (stage == 2)
+        if (stage == 2)
         {
             if (
                 Input.GetKeyDown(KeyCode.RightArrow) &&
@@ -151,33 +126,31 @@ public class UI_savescreen : MonoBehaviour
             return;
         }
 
+
         if (stage == 1)
         {
-            // A save slot was selected.
             horizontalnum = 0;
             SetStage(2);
         }
+
         else if (stage == 2)
         {
             if (horizontalnum == 0)
             {
-                // Left option: Save.
                 Save();
                 SetStage(3);
             }
             else
             {
-                // Right option: Cancel.
                 SetStage(1);
             }
         }
+
         else if (stage == 3)
         {
-            // Close the menu after the final saved message.
             CloseSaveScreen();
         }
 
-        // Require Return to be released before another action.
         canUseReturn = false;
     }
 
@@ -190,17 +163,14 @@ public class UI_savescreen : MonoBehaviour
 
         if (stage == 1)
         {
-            // Exit the save screen.
             CloseSaveScreen();
         }
         else if (stage == 2)
         {
-            // Return to save-slot selection.
             SetStage(1);
         }
         else if (stage == 3)
         {
-            // Return to Save/Cancel selection.
             SetStage(2);
         }
     }
@@ -208,18 +178,16 @@ public class UI_savescreen : MonoBehaviour
     void SetStage(int newStage)
     {
         stage = newStage;
-
         if (stage == 0)
         {
             savemenu.SetActive(false);
             arrow.SetActive(false);
 
-            SetAllFirstTexts(false);
+            firsttext.SetActive(false);
             savetext.SetActive(false);
             canceltext.SetActive(false);
             thirdtext.SetActive(false);
 
-            verticalnum = 0;
             horizontalnum = 0;
 
             return;
@@ -229,31 +197,30 @@ public class UI_savescreen : MonoBehaviour
 
         if (stage == 1)
         {
-            arrow.SetActive(true);
 
-            SetAllFirstTexts(true);
+        playerNameText.text = SaveData.playerName;
+        int hours = Mathf.FloorToInt(SaveData.playtime / 3600f);
+        int minutes = Mathf.FloorToInt((SaveData.playtime % 3600f) / 60f);
+
+        playtimeText.text = hours.ToString("00") + ":" + minutes.ToString("00");
+            arrow.SetActive(false);
+
+            firsttext.SetActive(true);
 
             savetext.SetActive(false);
             canceltext.SetActive(false);
             thirdtext.SetActive(false);
-
-            MoveArrowToVerticalPosition();
         }
+
         else if (stage == 2)
         {
             arrow.SetActive(true);
 
-            SetAllFirstTexts(true);
-
-            // Replace the selected row with Save/Cancel text.
-            firsttexts[verticalnum].SetActive(false);
+            firsttext.SetActive(false);
 
             savetext.SetActive(true);
             canceltext.SetActive(true);
             thirdtext.SetActive(false);
-
-            MoveObjectToSelectedRow(savetext);
-            MoveObjectToSelectedRow(canceltext);
 
             MoveArrowToHorizontalPosition();
         }
@@ -261,16 +228,10 @@ public class UI_savescreen : MonoBehaviour
         {
             arrow.SetActive(false);
 
-            SetAllFirstTexts(true);
-
-            // Replace the selected row with the final text.
-            firsttexts[verticalnum].SetActive(false);
-
+            firsttext.SetActive(false);
             savetext.SetActive(false);
             canceltext.SetActive(false);
             thirdtext.SetActive(true);
-
-            MoveObjectToSelectedRow(thirdtext);
         }
     }
 
@@ -278,6 +239,13 @@ public class UI_savescreen : MonoBehaviour
     {
         SetStage(0);
         UnfreezePlayer();
+
+        GameObject savepoint = GameObject.Find("savepoint");
+
+        if (savepoint != null)
+        {
+            savepoint.GetComponent<save>().savescreenon = false;
+        }
     }
 
     void FreezePlayer()
@@ -286,7 +254,9 @@ public class UI_savescreen : MonoBehaviour
         {
             return;
         }
-        playerRigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        playerRigidbody.constraints =
+            RigidbodyConstraints2D.FreezeAll;
     }
 
     void UnfreezePlayer()
@@ -299,42 +269,9 @@ public class UI_savescreen : MonoBehaviour
         playerRigidbody.constraints = originalConstraints;
     }
 
-    void SetAllFirstTexts(bool active)
-    {
-        foreach (GameObject textObject in firsttexts)
-        {
-            if (textObject != null)
-            {
-                textObject.SetActive(active);
-            }
-        }
-    }
-
-    void MoveArrowToVerticalPosition()
-    {
-        if (
-            arrowtransform == null ||
-            verticalpos.Count == 0 ||
-            verticalnum >= verticalpos.Count
-        )
-        {
-            return;
-        }
-
-        arrowtransform.position = new Vector3(
-            verticalpos[verticalnum].position.x,
-            verticalpos[verticalnum].position.y,
-            arrowtransform.position.z
-        );
-    }
-
     void MoveArrowToHorizontalPosition()
     {
-        if (
-            arrowtransform == null ||
-            verticalpos.Count == 0 ||
-            verticalnum >= verticalpos.Count
-        )
+        if (arrowtransform == null)
         {
             return;
         }
@@ -342,47 +279,68 @@ public class UI_savescreen : MonoBehaviour
         Transform selectedPosition =
             horizontalnum == 0 ? leftpos : rightpos;
 
-        arrowtransform.position = new Vector3(
-            selectedPosition.position.x,
-            verticalpos[verticalnum].position.y,
-            arrowtransform.position.z
-        );
-    }
-
-    void MoveObjectToSelectedRow(GameObject objectToMove)
-    {
-        if (
-            objectToMove == null ||
-            verticalpos.Count == 0 ||
-            verticalnum >= verticalpos.Count
-        )
+        if (selectedPosition == null)
         {
             return;
         }
 
-        objectToMove.transform.position = new Vector3(
-            objectToMove.transform.position.x,
-            verticalpos[verticalnum].position.y,
-            objectToMove.transform.position.z
-        );
+        arrowtransform.position =
+            selectedPosition.position;
     }
 
     void Save()
     {
         if (playerTransform == null)
         {
-            Debug.LogError("Player Transform has not been assigned.");
+            Debug.LogError(
+                "Player Transform has not been assigned."
+            );
             return;
         }
 
         SaveData.currentScene =
             SceneManager.GetActiveScene().buildIndex;
 
-        SaveData.currentPosition = playerTransform.position;
+        SaveData.currentPosition =
+            playerTransform.position;
+
         SaveData.hasSaveFile = true;
 
         SaveData.SaveAll();
 
+        UpdateSaveSlotText();
+
         Debug.Log("Saved");
+    }
+
+    void UpdateSaveSlotText()
+    {
+        if (playerNameText != null)
+        {
+            playerNameText.text =
+                SaveData.playerName;
+        }
+
+        if (locationText != null)
+        {
+            locationText.text =
+                SaveData.displayedLocation;
+        }
+
+        int hours = Mathf.FloorToInt(
+            SaveData.playtime / 3600f
+        );
+
+        int minutes = Mathf.FloorToInt(
+            (SaveData.playtime % 3600f) / 60f
+        );
+
+        if (playtimeText != null)
+        {
+            playtimeText.text =
+                hours.ToString("00") +
+                ":" +
+                minutes.ToString("00");
+        }
     }
 }

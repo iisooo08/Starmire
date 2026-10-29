@@ -9,10 +9,15 @@ public class save : MonoBehaviour
     public bool savescreenon = false;
     public Rigidbody2D playerRb;
     public Transform playerTransform;
+    public string location;
 
     void Start()
-    {//add conditional statement that onlyd oes this once
-        SaveData.LoadAll();
+    {
+        if (!SaveData.hasLoadedThisSession)
+        {
+            SaveData.LoadAll();
+            SaveData.hasLoadedThisSession = true;
+        }
     }
 
     void Update()

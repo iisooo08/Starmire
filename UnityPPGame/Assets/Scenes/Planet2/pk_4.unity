@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2167091569635488452, guid: 825f8168b06744c1ba90f71831423709, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3188931414274261159, guid: 825f8168b06744c1ba90f71831423709, type: 3}
       propertyPath: player
@@ -972,7 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguelist:
   - 'The red door is locked. '
-  name: Guard
+  name: []
   effectlist: 03000000
 --- !u!1 &307292023
 GameObject:
@@ -8476,7 +8476,7 @@ MonoBehaviour:
   - 'I''m the Queen of a lost kingdom. '
   - 'We used to thrive, but now there are only three of us, including me. '
   - 'Find the remaining two, and I shall grant you my one remaining treasure. '
-  name: Mermaid Queen
+  name: []
   effectlist: 030000000300000003000000
 --- !u!1 &1343061038
 GameObject:
@@ -12434,7 +12434,7 @@ Transform:
   m_GameObject: {fileID: 1701237949}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.7100801, y: -0.49016857, z: -10}
+  m_LocalPosition: {x: -1.818286, y: -0.49489403, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13371,7 +13371,7 @@ MonoBehaviour:
   - You're the royal wizard. Maybe you can solve this. I'll give you the powers to
     [inspect] objects for secret installations.
   - Good luck! Come find me if you discover anything interesting.
-  name: Royal Scholar
+  name: []
   effectlist: 03000000030000000300000003000000
 --- !u!114 &1876535454
 MonoBehaviour:
@@ -14578,7 +14578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguelist:
   - '* The door is locked. It seems like a double lock system.'
-  name: 
+  name: []
   effectlist: 03000000
 --- !u!1 &2062603953
 GameObject:
@@ -15022,7 +15022,7 @@ Tilemap:
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
       - {fileID: 21300000, guid: aa970ea528eee4a3ebb0b7aec6649989, type: 3}
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -2, y: -3, z: 0}
@@ -15099,7 +15099,7 @@ Tilemap:
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
       - {fileID: 21300000, guid: aa970ea528eee4a3ebb0b7aec6649989, type: 3}
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 5, y: -3, z: 0}
@@ -15198,7 +15198,7 @@ Tilemap:
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
       - {fileID: 21300000, guid: aa970ea528eee4a3ebb0b7aec6649989, type: 3}
       - {fileID: 21300000, guid: d28dae0601752456e806e5ec3742e02a, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 15, y: -3, z: 0}

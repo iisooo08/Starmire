@@ -2840,7 +2840,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4419104867166162190, guid: f5adbb1ca7391423fb60cba1e4d9cc46, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4047,6 +4047,8 @@ MonoBehaviour:
   - 
   effects: 04000000
   currentstr: start1
+  task: 0
+  taskname: 
 --- !u!4 &932272981
 Transform:
   m_ObjectHideFlags: 0
@@ -4864,6 +4866,10 @@ PrefabInstance:
     - target: {fileID: 8137221461584590018, guid: 3b7a4ea7664f946ecbf47a5fe897cb51, type: 3}
       propertyPath: m_Name
       value: textbubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 8137221461584590018, guid: 3b7a4ea7664f946ecbf47a5fe897cb51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9459,6 +9465,10 @@ PrefabInstance:
     - target: {fileID: 8774855120555541082, guid: dd4e6dd21f8a941b6a3c853b2c536071, type: 3}
       propertyPath: m_Name
       value: Ui_savescreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8774855120555541082, guid: dd4e6dd21f8a941b6a3c853b2c536071, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
